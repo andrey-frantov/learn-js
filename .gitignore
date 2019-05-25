@@ -2,4 +2,4 @@
 *.zip
 complete-javascript-course-master
 tasks/task-0.html
-tasks/task-0.js
+tasks/app.js
