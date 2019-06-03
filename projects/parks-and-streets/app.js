@@ -1,10 +1,10 @@
 
 class Park {
-  constructor(name, areaKm, numOfTrees, ageYr) {
+  constructor(name, areaKm, numOfTrees, buildDate) {
     this.name = name;
     this.areaKm = areaKm;
     this.numOfTrees = numOfTrees;
-    this.ageYr = ageYr;
+    this.buildDate = buildDate;
   }
 
   calculateDensity() {
@@ -25,12 +25,13 @@ class Street {
 
 // Parks report function
 function parksReport (...parks) {
-    
-    const ages = parks.map(cur => cur.ageYr);
+
+
+    const ages = parks.map(cur => new Date().getFullYear() - cur.buildDate);
     const ageAvg = (ages.reduce((acc, cur, idx, src) => (acc + cur) / src.length)).toFixed(2);
 
     console.log(`---- PARKS REPORT ----`);
-    console.log(`Our ${parks.length} parks have average length of ${ageAvg} years.`);
+    console.log(`Our ${parks.length} parks have average age of ${ageAvg} years.`);
 
     parks.forEach(cur => {
 
@@ -62,9 +63,9 @@ function streetsReport (...streets) {
 
 
 // Generate reports
-let greenPark = new Park('Green Park', 10, 1000, 100);
-let oakPark = new Park('Oak Park', 23, 200, 154);
-let centralPark = new Park('Central Park', 18, 800, 200);
+let greenPark = new Park('Green Park', 10, 1000, 1920);
+let oakPark = new Park('Oak Park', 23, 200, 1800);
+let centralPark = new Park('Central Park', 18, 800, 1505);
 
 parksReport(greenPark, oakPark, centralPark);
 
