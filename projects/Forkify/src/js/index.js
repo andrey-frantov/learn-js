@@ -37,8 +37,8 @@ const controlSearch = async () =>{
             // 5. Render results on UI
             clearLoader();
             searchView.renderResults(state.search.result);
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            console.log(err);
             alert('Something is wrong with the search...');
             clearLoader();
         }
@@ -76,8 +76,9 @@ const controlRecipe = async () => {
         state.recipe = new Recipe(id);
 
         try {
-            // Get recipe data
+            // Get recipe data and parse ingredients
             await state.recipe.getRecipe();
+            state.recipe.parseIngredients();
 
             // Calculate servings and time
             state.recipe.calcServings();
@@ -85,8 +86,8 @@ const controlRecipe = async () => {
 
             // Render recipe
             console.log(state.recipe);
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            console.log(err);
             alert('Something went wrong.:(');
         }
     }

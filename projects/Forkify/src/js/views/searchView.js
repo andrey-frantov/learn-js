@@ -81,13 +81,17 @@ const renderButtons = (page, numResults, resPerPage) => {
     elements.searchResPages.insertAdjacentHTML('afterbegin', button);
 };
 
-export const renderResults = (recipes, page = 1, resPerPage = 10) => {
+export const renderResults = (results, page = 1, resPerPage = 10) => {
     // Render results of current page
-    const start = (page -1) * resPerPage;
-    const end = page * resPerPage;
+    if (!results.error) {
+        const start = (page -1) * resPerPage;
+        const end = page * resPerPage;
 
-    recipes.slice(start, end).forEach(renderRecipe);
+        results.recipes.slice(start, end).forEach(renderRecipe);
 
-    // Render pagination buttons
-    renderButtons(page, recipes.length, resPerPage);
+        // Render pagination buttons
+        renderButtons(page, results.recipes.length, resPerPage);
+    } else {
+        alert(`Error occurred: ${results.error}`)
+    }
 };
